@@ -60,10 +60,14 @@ public class TaciteCopilotApp extends JFrame {
     }
 
     private void onQuit() {
+        DatabaseManager.close();
         System.exit(0);
     }
 
     public static void main(String[] args) {
+        // Initialize database connection on startup
+        DatabaseManager.init();
+        
         SwingUtilities.invokeLater(() -> {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
