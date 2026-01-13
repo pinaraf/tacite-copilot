@@ -67,7 +67,8 @@ public class TaciteCopilotApp extends JFrame {
         SwingUtilities.invokeLater(() -> {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            } catch (Exception e) {
+            } catch (ClassNotFoundException | InstantiationException | 
+                     IllegalAccessException | UnsupportedLookAndFeelException e) {
                 e.printStackTrace();
             }
             TaciteCopilotApp app = new TaciteCopilotApp();
