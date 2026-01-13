@@ -9,6 +9,10 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
+# SQLite database files
+tacite.db
+tacite.db-journal
+
 # IDE
 .idea/
 *.iml
