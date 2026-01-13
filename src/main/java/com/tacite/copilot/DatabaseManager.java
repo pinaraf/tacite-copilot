@@ -21,16 +21,16 @@ public class DatabaseManager {
      * Initialize the database connection.
      * Creates or opens the tacite.db database file in the application working directory.
      * The file is created automatically by SQLite JDBC driver if it doesn't exist.
-     * If a connection already exists, this method does nothing to avoid resource leaks.
+     * If a connection already exists and is valid, this method does nothing to avoid resource leaks.
      */
     public static void init() {
-        // Prevent resource leaks by not creating a new connection if one already exists
-        if (connection != null) {
-            System.out.println("Database connection already initialized.");
-            return;
-        }
-        
         try {
+            // Prevent resource leaks by not creating a new connection if one already exists and is valid
+            if (connection != null && !connection.isClosed()) {
+                System.out.println("Database connection already initialized.");
+                return;
+            }
+            
             // Connect to the database (creates tacite.db if it doesn't exist)
             connection = DriverManager.getConnection(DATABASE_URL);
             System.out.println("Database connection established successfully.");
@@ -65,6 +65,7 @@ public class DatabaseManager {
         if (connection != null) {
             try {
                 connection.close();
+                connection = null;  // Clear the reference after closing
                 System.out.println("Database connection closed.");
             } catch (SQLException e) {
                 System.err.println("Error closing database connection:");
