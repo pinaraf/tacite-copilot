@@ -36,7 +36,7 @@ public class DatabaseManager {
             System.out.println("Database connection established successfully.");
             System.out.println("Database file: tacite.db");
         } catch (SQLException e) {
-            System.err.println("Failed to initialize database connection:");
+            System.err.println("Failed to initialize database connection to: " + DATABASE_URL);
             e.printStackTrace();
         }
     }
@@ -52,7 +52,7 @@ public class DatabaseManager {
                 return connection;
             }
         } catch (SQLException e) {
-            System.err.println("Error checking connection status:");
+            System.err.println("Error validating database connection status:");
             e.printStackTrace();
         }
         return null;
